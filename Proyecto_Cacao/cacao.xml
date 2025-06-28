@@ -22,6 +22,7 @@ Si te hacen una pregunta que no está relacionada con el Proyecto de cultivo de 
     <pregunta id="experiencia_previa" tipo="texto">Experiencia previa en el cultivo de cacao u otros cultivos He tenido experiencia en el cultivo de cacao, participando en diversas etapas desde la preparación del terreno y la siembra, hasta el mantenimiento de las plantaciones y la cosecha del grano. Mis tareas incluyeron la poda, el control de plagas y enfermedades de forma sostenible, y la aplicación de fertilizantes orgánicos para asegurar un crecimiento óptimo y una producción de calidad.</pregunta>
     <pregunta id="asociacion_certificacion" tipo="booleano_texto">¿Pertenece a alguna asociación de productores o tiene algún tipo de certificación (orgánica, comercio justo, etc.)? Especificar: No</pregunta>
   </seccion>
+  
 
   <seccion id="condiciones_agroecologicas">
     <titulo>Condiciones Agroecológicas del Terreno</titulo>
