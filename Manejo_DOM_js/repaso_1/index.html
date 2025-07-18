@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso 1</title>
+    <style>
+        h2{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        #parrafo{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20px;
+        }
+        button{
+            width:200px;
+    height:70px;
+    background: linear-gradient(to left top, #0591ef 50%, #023558 50%);
+    border-style: none;
+    color:white;
+    font-size: 23px;
+    letter-spacing: 3px;
+    font-family: 'Lato';
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0px;
+    overflow: hidden;
+    transition: all .5s;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+    border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <p>Hola Mundo</p>
+    <h1>Ejemplo de manipulacion del DOM</h1>
+
+    <!-- Ejemplo Seleccion y Modificacion de Elementos-->
+
+    <div class="container">
+        <h2>1. Seleccion y modificacion de Elementos</h2>
+        <p id="parrafo1">Este Parrafo sera Modificado</p>
+        <button onclick="cambiarTexto()">Cambiar Texto</button>
+        <button onclick="cambiarColor()">Cambiar Color</button>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>

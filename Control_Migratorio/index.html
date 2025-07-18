@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control Migratorio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #fd7e14);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ffc107, #fd7e14);
+            color: white;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-entrada {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-salida {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-pendiente {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-passport"></i> Sistema de Control Migratorio</h1>
+            <p>Gestión integral de entradas y salidas de personas</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">
+                <i class="fas fa-chart-line"></i> Dashboard
+            </button>
+            <button class="nav-tab" onclick="showTab('registro')">
+                <i class="fas fa-user-plus"></i> Registro
+            </button>
+            <button class="nav-tab" onclick="showTab('busqueda')">
+                <i class="fas fa-search"></i> Búsqueda
+            </button>
+            <button class="nav-tab" onclick="showTab('reportes')">
+                <i class="fas fa-file-alt"></i> Reportes
+            </button>
+            <button class="nav-tab" onclick="showTab('configuracion')">
+                <i class="fas fa-cog"></i> Configuración
+            </button>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content">
+            <h2><i class="fas fa-chart-line"></i> Dashboard</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalPersonas">0</h3>
+                    <p>Personas Registradas</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="entradasHoy">0</h3>
+                    <p>Entradas Hoy</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="salidasHoy">0</h3>
+                    <p>Salidas Hoy</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="pendientes">0</h3>
+                    <p>Pendientes</p>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchDashboard" placeholder="Buscar persona..." onkeyup="searchDashboard()">
+                <button class="btn btn-primary" onclick="refreshDashboard()">
+                    <i class="fas fa-sync-alt"></i> Actualizar
+                </button>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Nacionalidad</th>
+                        <th>Estado</th>
+                        <th>Último Movimiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardTable">
+                    <!-- Datos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Registro -->
+        <div id="registro" class="tab-content hidden">
+            <h2><i class="fas fa-user-plus"></i> Registro de Persona</h2>
+            
+            <form id="registroForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="documento">Número de Documento *</label>
+                        <input type="text" id="documento" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipoDocumento">Tipo de Documento *</label>
+                        <select id="tipoDocumento" class="form-control" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="pasaporte">Pasaporte</option>
+                            <option value="dni">DNI</option>
+                            <option value="cedula">Cédula</option>
+                            <option value="visa">Visa</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nacionalidad">Nacionalidad *</label>
+                        <input type="text" id="nacionalidad" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                        <input type="date" id="fechaNacimiento" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Género *</label>
+                        <select id="genero" class="form-control" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" class="form-control">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="motivoViaje">Motivo del Viaje *</label>
+                        <select id="motivoViaje" class="form-control" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="turismo">Turismo</option>
+                            <option value="negocios">Negocios</option>
+                            <option value="trabajo">Trabajo</option>
+                            <option value="estudios">Estudios</option>
+                            <option value="familia">Familia</option>
+                            <option value="transito">Tránsito</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="duracionEstancia">Duración de Estancia</label>
+                        <input type="text" id="duracionEstancia" class="form-control" placeholder="ej: 30 días">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="observaciones">Observaciones</label>
+                    <textarea id="observaciones" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Registrar Persona
+                </button>
+                <button type="button" class="btn btn-warning" onclick="registrarEntrada()">
+                    <i class="fas fa-sign-in-alt"></i> Registrar Entrada
+                </button>
+                <button type="button" class="btn btn-danger" onclick="registrarSalida()">
+                    <i class="fas fa-sign-out-alt"></i> Registrar Salida
+                </button>
+            </form>
+        </div>
+
+        <!-- Búsqueda -->
+        <div id="busqueda" class="tab-content hidden">
+            <h2><i class="fas fa-search"></i> Búsqueda de Personas</h2>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, documento o nacionalidad..." onkeyup="searchPersonas()">
+                <button class="btn btn-primary" onclick="advancedSearch()">
+                    <i class="fas fa-filter"></i> Búsqueda Avanzada
+                </button>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Nacionalidad</th>
+                        <th>Estado</th>
+                        <th>Último Movimiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="searchTable">
+                    <!-- Resultados de búsqueda -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Reportes -->
+        <div id="reportes" class="tab-content hidden">
+            <h2><i class="fas fa-file-alt"></i> Reportes</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="reporteTipo">Tipo de Reporte</label>
+                    <select id="reporteTipo" class="form-control">
+                        <option value="entradas">Entradas por Fecha</option>
+                        <option value="salidas">Salidas por Fecha</option>
+                        <option value="nacionalidad">Por Nacionalidad</option>
+                        <option value="motivo">Por Motivo de Viaje</option>
+                        <option value="estado">Por Estado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reporteFecha">Fecha</label>
+                    <input type="date" id="reporteFecha" class="form-control">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="generarReporte()">
+                <i class="fas fa-download"></i> Generar Reporte
+            </button>
+            <button class="btn btn-success" onclick="exportarExcel()">
+                <i class="fas fa-file-excel"></i> Exportar Excel
+            </button>
+
+            <div id="reporteResultado" style="margin-top: 20px;">
+                <!-- Resultado del reporte -->
+            </div>
+        </div>
+
+        <!-- Configuración -->
+        <div id="configuracion" class="tab-content hidden">
+            <h2><i class="fas fa-cog"></i> Configuración del Sistema</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="paisOrigen">País de Origen</label>
+                    <input type="text" id="paisOrigen" class="form-control" value="México">
+                </div>
+                <div class="form-group">
+                    <label for="puntoControl">Punto de Control</label>
+                    <input type="text" id="puntoControl" class="form-control" value="Aeropuerto Internacional">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="usuario">Usuario del Sistema</label>
+                    <input type="text" id="usuario" class="form-control" value="Admin">
+                </div>
+                <div class="form-group">
+                    <label for="fechaSistema">Fecha del Sistema</label>
+                    <input type="datetime-local" id="fechaSistema" class="form-control">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="guardarConfiguracion()">
+                <i class="fas fa-save"></i> Guardar Configuración
+            </button>
+            <button class="btn btn-warning" onclick="resetearDatos()">
+                <i class="fas fa-trash"></i> Resetear Datos
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal para detalles -->
+    <div id="personaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">Detalles de la Persona</h3>
+            <div id="modalContent">
+                <!-- Contenido del modal -->
+            </div>
+        </div>
+    </div>
+
+    <script src="control_migratorio.js"></script>
+</body>
+</html> 

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Uso - Sistema de Control Migratorio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .step h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .step-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .step-text {
+            line-height: 1.6;
+        }
+
+        .step-image {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+
+        .feature-card h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        @media (max-width: 768px) {
+            .step-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-passport"></i> Guía de Uso - Sistema de Control Migratorio</h1>
+        
+        <div class="alert alert-info">
+            <strong><i class="fas fa-info-circle"></i> Información:</strong>
+            Esta es una guía paso a paso para usar el Sistema de Control Migratorio. 
+            Abre <a href="index.html" class="btn">index.html</a> para acceder al sistema.
+        </div>
+
+        <div class="step">
+            <h3><i class="fas fa-play"></i> Paso 1: Acceder al Sistema</h3>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>Para comenzar a usar el sistema:</p>
+                    <ol>
+                        <li>Abre el archivo <code>index.html</code> en tu navegador</li>
+                        <li>El sistema se cargará automáticamente con datos de ejemplo</li>
+                        <li>Verás el dashboard principal con estadísticas</li>
+                        <li>Navega entre las pestañas usando los botones superiores</li>
+                    </ol>
+                </div>
+                <div class="step-image">
+                    <i class="fas fa-desktop" style="font-size: 3em; color: #667eea;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><i class="fas fa-user-plus"></i> Paso 2: Registrar una Persona</h3>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>Para registrar una nueva persona:</p>
+                    <ol>
+                        <li>Ve a la pestaña "Registro"</li>
+                        <li>Completa todos los campos marcados con (*)</li>
+                        <li>Ingresa datos como nombre, documento, nacionalidad, etc.</li>
+                        <li>Selecciona el motivo del viaje</li>
+                        <li>Haz clic en "Registrar Persona"</li>
+                    </ol>
+                    <p><strong>Campos requeridos:</strong></p>
+                    <ul>
+                        <li>Nombre Completo</li>
+                        <li>Número de Documento</li>
+                        <li>Tipo de Documento</li>
+                        <li>Nacionalidad</li>
+                        <li>Fecha de Nacimiento</li>
+                        <li>Género</li>
+                        <li>Motivo del Viaje</li>
+                    </ul>
+                </div>
+                <div class="step-image">
+                    <i class="fas fa-user-plus" style="font-size: 3em; color: #28a745;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><i class="fas fa-sign-in-alt"></i> Paso 3: Registrar Entrada/Salida</h3>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>Para registrar movimientos migratorios:</p>
+                    <ol>
+                        <li>En la pestaña "Registro"</li>
+                        <li>Ingresa el número de documento de la persona</li>
+                        <li>Si es una persona nueva, completa todos los datos</li>
+                        <li>Haz clic en "Registrar Entrada" o "Registrar Salida"</li>
+                        <li>El sistema actualizará automáticamente el estado</li>
+                    </ol>
+                    <p><strong>Estados posibles:</strong></p>
+                    <ul>
+                        <li><span style="color: #28a745;">Entrada</span>: Persona que acaba de ingresar</li>
+                        <li><span style="color: #dc3545;">Salida</span>: Persona que acaba de salir</li>
+                        <li><span style="color: #ffc107;">Pendiente</span>: Persona registrada pero sin movimiento</li>
+                    </ul>
+                </div>
+                <div class="step-image">
+                    <i class="fas fa-exchange-alt" style="font-size: 3em; color: #dc3545;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><i class="fas fa-search"></i> Paso 4: Buscar Personas</h3>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>Para encontrar personas registradas:</p>
+                    <ol>
+                        <li>Ve a la pestaña "Búsqueda"</li>
+                        <li>Escribe en el campo de búsqueda</li>
+                        <li>Puedes buscar por:</li>
+                        <ul>
+                            <li>Nombre de la persona</li>
+                            <li>Número de documento</li>
+                            <li>Nacionalidad</li>
+                        </ul>
+                        <li>Los resultados se muestran automáticamente</li>
+                        <li>Haz clic en "Ver" para ver detalles completos</li>
+                    </ol>
+                </div>
+                <div class="step-image">
+                    <i class="fas fa-search" style="font-size: 3em; color: #17a2b8;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><i class="fas fa-file-alt"></i> Paso 5: Generar Reportes</h3>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>Para crear reportes y estadísticas:</p>
+                    <ol>
+                        <li>Ve a la pestaña "Reportes"</li>
+                        <li>Selecciona el tipo de reporte:</li>
+                        <ul>
+                            <li><strong>Entradas por Fecha:</strong> Todas las entradas en una fecha</li>
+                            <li><strong>Salidas por Fecha:</strong> Todas las salidas en una fecha</li>
+                            <li><strong>Por Nacionalidad:</strong> Estadísticas por país</li>
+                            <li><strong>Por Motivo de Viaje:</strong> Análisis de motivos</li>
+                            <li><strong>Por Estado:</strong> Distribución de estados</li>
+                        </ul>
+                        <li>Selecciona una fecha si es necesario</li>
+                        <li>Haz clic en "Generar Reporte"</li>
+                    </ol>
+                </div>
+                <div class="step-image">
+                    <i class="fas fa-chart-bar" style="font-size: 3em; color: #fd7e14;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><i class="fas fa-cog"></i> Paso 6: Configurar el Sistema</h3>
+            <div class="step-content">
+                <div class="step-text">
+                    <p>Para personalizar el sistema:</p>
+                    <ol>
+                        <li>Ve a la pestaña "Configuración"</li>
+                        <li>Modifica los parámetros según tu necesidad:</li>
+                        <ul>
+                            <li><strong>País de Origen:</strong> País donde opera el sistema</li>
+                            <li><strong>Punto de Control:</strong> Nombre del punto migratorio</li>
+                            <li><strong>Usuario:</strong> Usuario actual del sistema</li>
+                            <li><strong>Fecha del Sistema:</strong> Configuración de fecha/hora</li>
+                        </ul>
+                        <li>Haz clic en "Guardar Configuración"</li>
+                        <li>Los cambios se guardan automáticamente</li>
+                    </ol>
+                </div>
+                <div class="step-image">
+                    <i class="fas fa-cogs" style="font-size: 3em; color: #6f42c1;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4><i class="fas fa-dashboard"></i> Dashboard</h4>
+                <p>Vista general con estadísticas en tiempo real, incluyendo total de personas, entradas y salidas del día, y personas pendientes.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><i class="fas fa-shield-alt"></i> Validación</h4>
+                <p>Sistema de validación automática que verifica campos requeridos, previene duplicados y asegura la integridad de los datos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><i class="fas fa-history"></i> Historial</h4>
+                <p>Registro completo de todos los movimientos migratorios con fechas, observaciones y detalles de cada entrada y salida.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><i class="fas fa-mobile-alt"></i> Responsivo</h4>
+                <p>Interfaz adaptativa que funciona perfectamente en computadoras, tablets y dispositivos móviles.</p>
+            </div>
+        </div>
+
+        <div class="alert alert-success">
+            <strong><i class="fas fa-check-circle"></i> ¡Listo!</strong>
+            Ya conoces todas las funcionalidades principales del Sistema de Control Migratorio. 
+            <a href="index.html" class="btn">Comenzar a usar</a>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong><i class="fas fa-exclamation-triangle"></i> Nota importante:</strong>
+            Los datos se almacenan localmente en tu navegador. Para mantener la información, no borres los datos del navegador.
+        </div>
+
+        <h3><i class="fas fa-code"></i> Ejemplo de Datos</h3>
+        <p>El sistema incluye datos de ejemplo para que puedas probar todas las funcionalidades:</p>
+        
+        <div class="code-block">
+// Ejemplo de persona registrada
+{
+    "id": 1,
+    "nombre": "Juan Carlos Pérez",
+    "documento": "ABC123456",
+    "tipoDocumento": "pasaporte",
+    "nacionalidad": "España",
+    "fechaNacimiento": "1985-03-15",
+    "genero": "masculino",
+    "telefono": "+34 123 456 789",
+    "email": "juan.perez@email.com",
+    "direccion": "Calle Mayor 123, Madrid",
+    "motivoViaje": "turismo",
+    "duracionEstancia": "15 días",
+    "observaciones": "Primera visita al país",
+    "estado": "entrada"
+}
+        </div>
+
+        <h3><i class="fas fa-lightbulb"></i> Consejos de Uso</h3>
+        <ul>
+            <li><strong>Búsqueda rápida:</strong> Usa el campo de búsqueda en el dashboard para encontrar personas rápidamente</li>
+            <li><strong>Validación:</strong> Asegúrate de completar todos los campos requeridos marcados con (*)</li>
+            <li><strong>Reportes:</strong> Genera reportes regularmente para mantener un control de las estadísticas</li>
+            <li><strong>Backup:</strong> Los datos se guardan automáticamente en tu navegador</li>
+            <li><strong>Navegación:</strong> Usa las pestañas para acceder a las diferentes funcionalidades</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn" style="font-size: 1.2em;">
+                <i class="fas fa-rocket"></i> Ir al Sistema de Control Migratorio
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
