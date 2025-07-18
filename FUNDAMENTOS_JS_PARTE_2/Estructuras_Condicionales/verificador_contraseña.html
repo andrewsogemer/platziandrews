@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Contraseña</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.08);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="password"] {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            width: 220px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        button {
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .resultado {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            min-height: 40px;
+        }
+        .correcta {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+        .incorrecta {
+            background: linear-gradient(45deg, #e17055, #d63031);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Verificador de Contraseña</h1>
+        <div class="input-group">
+            <label for="password">Introduce la contraseña:</label>
+            <input type="password" id="password" placeholder="Contraseña">
+        </div>
+        <button onclick="verificarPassword()">Verificar</button>
+        <button onclick="limpiar()">Limpiar</button>
+        <div id="resultado" class="resultado"></div>
+    </div>
+    <script>
+        function verificarPassword() {
+            const claveCorrecta = "Secreta123";
+            const input = document.getElementById('password');
+            const resultado = document.getElementById('resultado');
+            const valor = input.value;
+            if (valor === "") {
+                resultado.textContent = "⚠️ Por favor, ingresa una contraseña";
+                resultado.className = "resultado";
+                return;
+            }
+            if (valor === claveCorrecta) {
+                resultado.textContent = "✅ Contraseña correcta. ¡Bienvenido!";
+                resultado.className = "resultado correcta";
+            } else {
+                resultado.textContent = "❌ Contraseña incorrecta.";
+                resultado.className = "resultado incorrecta";
+            }
+        }
+        function limpiar() {
+            document.getElementById('password').value = '';
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = '';
+            resultado.className = 'resultado';
+        }
+        // Permitir Enter para verificar
+        document.getElementById('password').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verificarPassword();
+            }
+        });
+        // Enfoque automático
+        window.onload = function() {
+            document.getElementById('password').focus();
+        };
+    </script>
+</body>
+</html> 

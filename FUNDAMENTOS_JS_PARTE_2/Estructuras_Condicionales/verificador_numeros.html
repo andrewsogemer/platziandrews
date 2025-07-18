@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Números</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .input-group {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        input[type="number"] {
+            width: 200px;
+            padding: 12px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-align: center;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .resultado {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .positivo {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+        
+        .negativo {
+            background: linear-gradient(45deg, #e17055, #d63031);
+        }
+        
+        .cero {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+        }
+        
+        .ejemplos {
+            margin-top: 30px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .ejemplos h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .ejemplos ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .ejemplos li {
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Verificador de Números</h1>
+        
+        <div class="input-group">
+            <label for="numero">Ingresa un número:</label>
+            <input type="number" id="numero" placeholder="Ej: 5, -3, 0" step="any">
+        </div>
+        
+        <button onclick="verificarNumero()">Verificar</button>
+        <button onclick="limpiar()">Limpiar</button>
+        
+        <div id="resultado" class="resultado">
+            El resultado aparecerá aquí...
+        </div>
+        
+        <div class="ejemplos">
+            <h3>📝 Ejemplos de uso:</h3>
+            <ul>
+                <li>• <strong>5</strong> → Positivo</li>
+                <li>• <strong>-3</strong> → Negativo</li>
+                <li>• <strong>0</strong> → Cero</li>
+                <li>• <strong>10.5</strong> → Positivo</li>
+                <li>• <strong>-7.2</strong> → Negativo</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function verificarNumero() {
+            // Obtener el valor del input
+            const input = document.getElementById('numero');
+            const resultado = document.getElementById('resultado');
+            
+            // Verificar si el input está vacío
+            if (input.value === '') {
+                resultado.textContent = '⚠️ Por favor, ingresa un número';
+                resultado.className = 'resultado';
+                return;
+            }
+            
+            // Convertir el valor a número
+            const numero = parseFloat(input.value);
+            
+            // Verificar si es un número válido
+            if (isNaN(numero)) {
+                resultado.textContent = '❌ Por favor, ingresa un número válido';
+                resultado.className = 'resultado';
+                return;
+            }
+            
+            // Estructura condicional para determinar el tipo de número
+            if (numero > 0) {
+                resultado.textContent = `✅ ${numero} es un número POSITIVO`;
+                resultado.className = 'resultado positivo';
+            } else if (numero < 0) {
+                resultado.textContent = `❌ ${numero} es un número NEGATIVO`;
+                resultado.className = 'resultado negativo';
+            } else {
+                resultado.textContent = `🔵 ${numero} es CERO`;
+                resultado.className = 'resultado cero';
+            }
+        }
+        
+        function limpiar() {
+            document.getElementById('numero').value = '';
+            document.getElementById('resultado').textContent = 'El resultado aparecerá aquí...';
+            document.getElementById('resultado').className = 'resultado';
+        }
+        
+        // Permitir usar Enter para verificar
+        document.getElementById('numero').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verificarNumero();
+            }
+        });
+        
+        // Enfoque automático en el input
+        window.onload = function() {
+            document.getElementById('numero').focus();
+        };
+    </script>
+</body>
+</html> 
